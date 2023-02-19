@@ -13,10 +13,9 @@ namespace Task8
             }
         }
         List<Circle> _circles = new List<Circle>();
-        int _radius;
-        List<Password> _givenPassword = new List<Password>();
-        List<Password> _enteredPassword = new List<Password>();
-        private enum Password
+        List<PasswordNumber> _givenPassword = new List<PasswordNumber>();
+        List<PasswordNumber> _enteredPassword = new List<PasswordNumber>();
+        private enum PasswordNumber
         {
             One,
             Two,
@@ -36,20 +35,35 @@ namespace Task8
 
         private void Panel_Paint(object sender, PaintEventArgs e)
         {
+            MakingCircles();
+            Draw();   
+        }
+        private void MakingCircles()
+        {
             int width = Panel.ClientSize.Width;
             int height = Panel.ClientSize.Height;
-            _radius = width / 8;
             for (int i = 40; i < width; i += width / 3)
             {
                 for (int j = 40; j < height; j += height / 3)
                 {
-                    e.Graphics.FillEllipse(Brushes.Blue, i, j, _radius, _radius);
-                    Circle circle = new Circle(new Point(i, j), _radius);
+                    Circle circle = new Circle(new Point(i, j), width / 8);
                     _circles.Add(circle);
                 }
             }
         }
-
+        private void Draw()
+        {
+            Graphics g = CreateGraphics();
+            int width = Panel.ClientSize.Width;
+            int height = Panel.ClientSize.Height;
+            for (int i = 40; i < width; i += width / 3)
+            {
+                for (int j = 40; j < height; j += height / 3)
+                {
+                    g.FillEllipse(Brushes.Blue, i, j, width / 8, width / 8);
+                }
+            }
+        }
         private void NewPasswordButton_Click(object sender, EventArgs e)
         {
 
