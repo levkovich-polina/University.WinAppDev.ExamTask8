@@ -31,6 +31,7 @@
             this.Panel = new System.Windows.Forms.Panel();
             this.NewPasswordButton = new System.Windows.Forms.Button();
             this.PasswordLabel = new System.Windows.Forms.Label();
+            this.SetLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Panel
@@ -63,11 +64,20 @@
             this.PasswordLabel.Size = new System.Drawing.Size(0, 20);
             this.PasswordLabel.TabIndex = 2;
             // 
+            // SetLabel
+            // 
+            this.SetLabel.AutoSize = true;
+            this.SetLabel.Location = new System.Drawing.Point(546, 221);
+            this.SetLabel.Name = "SetLabel";
+            this.SetLabel.Size = new System.Drawing.Size(0, 20);
+            this.SetLabel.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.SetLabel);
             this.Controls.Add(this.PasswordLabel);
             this.Controls.Add(this.NewPasswordButton);
             this.Controls.Add(this.Panel);
@@ -83,5 +93,6 @@
         private Panel Panel;
         private Button NewPasswordButton;
         private Label PasswordLabel;
+        private Label SetLabel;
     }
 }

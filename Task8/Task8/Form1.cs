@@ -1,5 +1,3 @@
-using System.Windows.Forms;
-
 namespace Task8
 {
     public partial class Form1 : Form
@@ -19,7 +17,7 @@ namespace Task8
         Circle[] _circle = new Circle[9];
         List<PasswordNumber> _givenPassword = new List<PasswordNumber>();
         List<PasswordNumber> _enteredPassword = new List<PasswordNumber>();
-        
+        PasswordMode _mode = PasswordMode.Enter;
         public enum PasswordNumber
         {
             One,
@@ -42,11 +40,11 @@ namespace Task8
         {
             InitializeComponent();
             MakingCircles();
-            _enteredPassword.Add(PasswordNumber.One);
-            _enteredPassword.Add(PasswordNumber.Two);
-            _enteredPassword.Add(PasswordNumber.Three);
-            _enteredPassword.Add(PasswordNumber.Six);
-            _enteredPassword.Add(PasswordNumber.Nine);
+            _givenPassword.Add(PasswordNumber.One);
+            _givenPassword.Add(PasswordNumber.Two);
+            _givenPassword.Add(PasswordNumber.Three);
+            _givenPassword.Add(PasswordNumber.Six);
+            _givenPassword.Add(PasswordNumber.Nine);
         }
 
         private void MakingCircles()
@@ -66,7 +64,7 @@ namespace Task8
             var radius = 40;
             _circle = new[]
             {
-             new Circle(new Point(x1, y1), radius, PasswordNumber.One),
+            new Circle(new Point(x1, y1), radius, PasswordNumber.One),
             new Circle(new Point(x2, y1), radius, PasswordNumber.Two),
             new Circle(new Point(x3, y1), radius, PasswordNumber.Three),
 
@@ -86,11 +84,11 @@ namespace Task8
             Graphics g = Panel.CreateGraphics();
             for (int i = 0; i < 9; i++)
             {
-                g.FillEllipse(Brushes.Blue, _circle[i].Center.X, _circle[i].Center.Y, _circle[i].Radius, _circle[i].Radius);
+                g.FillEllipse(Brushes.Blue, _circle[i].Center.X - _circle[i].Radius, _circle[i].Center.Y - _circle[i].Radius, _circle[i].Radius, _circle[i].Radius);
             }
-            for(int i=0; i<_enteredPassword.Count;i++)
+            for (int i = 0; i < _givenPassword.Count; i++)
             {
-                PasswordLabel.Text += _enteredPassword[i];
+                PasswordLabel.Text += _givenPassword[i];
                 PasswordLabel.Text += " ";
             }
 
@@ -107,12 +105,37 @@ namespace Task8
 
         private void Panel_MouseMove(object sender, MouseEventArgs e)
         {
-           
+            if(Panel.Capture == true && _mode == PasswordMode.Enter)
+            {
+                int xCoordinate = e.X;
+                int yCoordinate = e.Y;
+                for (int i = 0; i < 9; i++)
+                {
+                    int dx = _circle[i].Center.X - xCoordinate;
+                    int dy = _circle[i].Center.Y - yCoordinate;
+                    int radius = _circle[i].Radius;
+                    if (dx * dx + dy * dy <= radius * radius)
+                    {
+                        _enteredPassword.Add(_circle[i].Number);
+                    }
+
+                }
+                for (int i = 0; i < _enteredPassword.Count; i++)
+                {
+                    SetLabel.Text += _enteredPassword[i];
+                    SetLabel.Text += " ";
+
+                }
+            }
         }
 
         private void Panel_MouseDown(object sender, MouseEventArgs e)
         {
-            Panel.Capture = true;
+            if (e.Button == MouseButtons.Left)
+            {
+                _enteredPassword.Clear();
+                Panel.Capture = true;                              
+            }
         }
 
         private void Panel_Paint(object sender, PaintEventArgs e)
