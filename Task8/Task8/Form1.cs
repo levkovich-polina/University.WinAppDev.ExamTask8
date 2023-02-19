@@ -1,3 +1,5 @@
+using static Task8.Form1;
+
 namespace Task8
 {
     public partial class Form1 : Form
@@ -105,7 +107,7 @@ namespace Task8
 
         private void Panel_MouseMove(object sender, MouseEventArgs e)
         {
-            if(Panel.Capture == true && _mode == PasswordMode.Enter)
+            if (Panel.Capture == true && _mode == PasswordMode.Enter)
             {
                 int xCoordinate = e.X;
                 int yCoordinate = e.Y;
@@ -116,17 +118,19 @@ namespace Task8
                     int radius = _circle[i].Radius;
                     if (dx * dx + dy * dy <= radius * radius)
                     {
-                        _enteredPassword.Add(_circle[i].Number);
+                        if(_enteredPassword.Count > 1 && _enteredPassword[_enteredPassword.Count-1] != _circle[i].Number)
+                        {
+                            _enteredPassword.Add(_circle[i].Number);
+                        }
                     }
-
                 }
                 for (int i = 0; i < _enteredPassword.Count; i++)
                 {
                     SetLabel.Text += _enteredPassword[i];
                     SetLabel.Text += " ";
-
                 }
             }
+
         }
 
         private void Panel_MouseDown(object sender, MouseEventArgs e)
@@ -134,7 +138,7 @@ namespace Task8
             if (e.Button == MouseButtons.Left)
             {
                 _enteredPassword.Clear();
-                Panel.Capture = true;                              
+                Panel.Capture = true;
             }
         }
 
