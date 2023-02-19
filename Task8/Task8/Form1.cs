@@ -1,5 +1,3 @@
-using static Task8.Form1;
-
 namespace Task8
 {
     public partial class Form1 : Form
@@ -118,7 +116,8 @@ namespace Task8
                     int radius = _circle[i].Radius;
                     if (dx * dx + dy * dy <= radius * radius)
                     {
-                        if(_enteredPassword.Count > 1 && _enteredPassword[_enteredPassword.Count-1] != _circle[i].Number)
+
+                        if (_enteredPassword.Count == 0 || _enteredPassword[_enteredPassword.Count - 1] != _circle[i].Number)
                         {
                             _enteredPassword.Add(_circle[i].Number);
                         }
