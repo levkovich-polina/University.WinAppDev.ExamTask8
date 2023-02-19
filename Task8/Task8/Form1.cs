@@ -6,16 +6,18 @@ namespace Task8
         {
             public Point Center { get; set; }
             public int Radius { get; set; }
-            public Circle(Point point, int radius)
+            public PasswordNumber Number { get; set; }
+            public Circle(Point point, int radius, PasswordNumber number)
             {
                 Center = point;
                 Radius = radius;
+                Number = number;
             }
         }
-        List<Circle> _circles = new List<Circle>();
+        Circle[] _circle = new Circle[9];
         List<PasswordNumber> _givenPassword = new List<PasswordNumber>();
         List<PasswordNumber> _enteredPassword = new List<PasswordNumber>();
-        private enum PasswordNumber
+        public enum PasswordNumber
         {
             One,
             Two,
@@ -27,41 +29,53 @@ namespace Task8
             Eight,
             Nine
         }
-      
+
         public Form1()
         {
             InitializeComponent();
+            MakingCircles();
+            Draw();
+
         }
 
-        private void Panel_Paint(object sender, PaintEventArgs e)
-        {
-            MakingCircles();
-            Draw();   
-        }
         private void MakingCircles()
         {
             int width = Panel.ClientSize.Width;
             int height = Panel.ClientSize.Height;
-            for (int i = 40; i < width; i += width / 3)
+            var shiftX = width / 4;
+            var shiftY = height / 4;
+
+            var x1 = 1 * shiftX;
+            var x2 = 2 * shiftX;
+            var x3 = 3 * shiftX;
+
+            var y1 = 1 * shiftY;
+            var y2 = 2 * shiftY;
+            var y3 = 3 * shiftY;
+            var radius = 20;
+            _circle = new[]
             {
-                for (int j = 40; j < height; j += height / 3)
-                {
-                    Circle circle = new Circle(new Point(i, j), width / 8);
-                    _circles.Add(circle);
-                }
-            }
+             new Circle(new Point(x1, y1), radius, PasswordNumber.One),
+            new Circle(new Point(x2, y1), radius, PasswordNumber.Two),
+            new Circle(new Point(x3, y1), radius, PasswordNumber.Three),
+
+            new Circle(new Point(x1, y2), radius, PasswordNumber.Four),
+            new Circle(new Point(x2, y2), radius, PasswordNumber.Five),
+            new Circle(new Point(x3, y2), radius, PasswordNumber.Six),
+
+            new Circle(new Point(x1, y3), radius, PasswordNumber.Seven),
+            new Circle(new Point(x2, y3), radius, PasswordNumber.Eight),
+            new Circle(new Point(x3, y3), radius, PasswordNumber.Nine),
+            };
         }
+
+
         private void Draw()
         {
-            Graphics g = CreateGraphics();
-            int width = Panel.ClientSize.Width;
-            int height = Panel.ClientSize.Height;
-            for (int i = 40; i < width; i += width / 3)
+            Graphics g = Panel.CreateGraphics();
+            for (int i = 0; i < 9; i++)
             {
-                for (int j = 40; j < height; j += height / 3)
-                {
-                    g.FillEllipse(Brushes.Blue, i, j, width / 8, width / 8);
-                }
+                g.FillEllipse(Brushes.Blue, _circle[i].Center.X, _circle[i].Center.Y, _circle[i].Radius, _circle[i].Radius);
             }
         }
         private void NewPasswordButton_Click(object sender, EventArgs e)
