@@ -32,6 +32,8 @@
             this.NewPasswordButton = new System.Windows.Forms.Button();
             this.PasswordLabel = new System.Windows.Forms.Label();
             this.SetLabel = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Panel
@@ -48,6 +50,7 @@
             // 
             // NewPasswordButton
             // 
+            this.NewPasswordButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.NewPasswordButton.Location = new System.Drawing.Point(544, 27);
             this.NewPasswordButton.Name = "NewPasswordButton";
             this.NewPasswordButton.Size = new System.Drawing.Size(217, 61);
@@ -72,17 +75,42 @@
             this.SetLabel.Size = new System.Drawing.Size(0, 20);
             this.SetLabel.TabIndex = 3;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Location = new System.Drawing.Point(523, 144);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(134, 20);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Заданный пароль";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label3.Location = new System.Drawing.Point(523, 201);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(138, 20);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Вводимый пароль";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.SetLabel);
             this.Controls.Add(this.PasswordLabel);
             this.Controls.Add(this.NewPasswordButton);
             this.Controls.Add(this.Panel);
+            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,5 +122,7 @@
         private Button NewPasswordButton;
         private Label PasswordLabel;
         private Label SetLabel;
+        private Label label2;
+        private Label label3;
     }
 }
