@@ -30,6 +30,7 @@
         {
             this.Panel = new System.Windows.Forms.Panel();
             this.NewPasswordButton = new System.Windows.Forms.Button();
+            this.PasswordLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Panel
@@ -39,6 +40,7 @@
             this.Panel.Name = "Panel";
             this.Panel.Size = new System.Drawing.Size(466, 387);
             this.Panel.TabIndex = 0;
+            this.Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
             this.Panel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseDown);
             this.Panel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseMove);
             this.Panel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseUp);
@@ -53,16 +55,26 @@
             this.NewPasswordButton.UseVisualStyleBackColor = true;
             this.NewPasswordButton.Click += new System.EventHandler(this.NewPasswordButton_Click);
             // 
+            // PasswordLabel
+            // 
+            this.PasswordLabel.AutoSize = true;
+            this.PasswordLabel.Location = new System.Drawing.Point(549, 164);
+            this.PasswordLabel.Name = "PasswordLabel";
+            this.PasswordLabel.Size = new System.Drawing.Size(0, 20);
+            this.PasswordLabel.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.PasswordLabel);
             this.Controls.Add(this.NewPasswordButton);
             this.Controls.Add(this.Panel);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -70,5 +82,6 @@
 
         private Panel Panel;
         private Button NewPasswordButton;
+        private Label PasswordLabel;
     }
 }

@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 namespace Task8
 {
     public partial class Form1 : Form
@@ -17,6 +19,7 @@ namespace Task8
         Circle[] _circle = new Circle[9];
         List<PasswordNumber> _givenPassword = new List<PasswordNumber>();
         List<PasswordNumber> _enteredPassword = new List<PasswordNumber>();
+        
         public enum PasswordNumber
         {
             One,
@@ -29,13 +32,21 @@ namespace Task8
             Eight,
             Nine
         }
+        public enum PasswordMode
+        {
+            Enter,
+            Set
+        }
 
         public Form1()
         {
             InitializeComponent();
             MakingCircles();
-            Draw();
-
+            _enteredPassword.Add(PasswordNumber.One);
+            _enteredPassword.Add(PasswordNumber.Two);
+            _enteredPassword.Add(PasswordNumber.Three);
+            _enteredPassword.Add(PasswordNumber.Six);
+            _enteredPassword.Add(PasswordNumber.Nine);
         }
 
         private void MakingCircles()
@@ -52,7 +63,7 @@ namespace Task8
             var y1 = 1 * shiftY;
             var y2 = 2 * shiftY;
             var y3 = 3 * shiftY;
-            var radius = 20;
+            var radius = 40;
             _circle = new[]
             {
              new Circle(new Point(x1, y1), radius, PasswordNumber.One),
@@ -77,6 +88,12 @@ namespace Task8
             {
                 g.FillEllipse(Brushes.Blue, _circle[i].Center.X, _circle[i].Center.Y, _circle[i].Radius, _circle[i].Radius);
             }
+            for(int i=0; i<_enteredPassword.Count;i++)
+            {
+                PasswordLabel.Text += _enteredPassword[i];
+                PasswordLabel.Text += " ";
+            }
+
         }
         private void NewPasswordButton_Click(object sender, EventArgs e)
         {
@@ -90,12 +107,17 @@ namespace Task8
 
         private void Panel_MouseMove(object sender, MouseEventArgs e)
         {
-
+           
         }
 
         private void Panel_MouseDown(object sender, MouseEventArgs e)
         {
             Panel.Capture = true;
+        }
+
+        private void Panel_Paint(object sender, PaintEventArgs e)
+        {
+            Draw();
         }
     }
 }
