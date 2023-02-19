@@ -120,13 +120,15 @@ namespace Task8
                         if (_enteredPassword.Count == 0 || _enteredPassword[_enteredPassword.Count - 1] != _circle[i].Number)
                         {
                             _enteredPassword.Add(_circle[i].Number);
+                            SetLabel.Text = null;
+                            for (int j = 0; j < _enteredPassword.Count; j++)
+                            {
+                                SetLabel.Text += _enteredPassword[j];
+                                SetLabel.Text += " ";
+                            }
+
                         }
                     }
-                }
-                for (int i = 0; i < _enteredPassword.Count; i++)
-                {
-                    SetLabel.Text += _enteredPassword[i];
-                    SetLabel.Text += " ";
                 }
             }
 
@@ -136,7 +138,7 @@ namespace Task8
         {
             if (e.Button == MouseButtons.Left)
             {
-                _enteredPassword.Clear();
+                _enteredPassword.Clear();                
                 Panel.Capture = true;
             }
         }
